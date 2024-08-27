@@ -10,6 +10,7 @@ export default function Page({ params }) {
   const [recommended, setRecommended] = useState(null);
 
   const genre = params.genreID
+  
 
   useEffect(() => {
     async function fetchRecommended(genre) {
@@ -17,7 +18,7 @@ export default function Page({ params }) {
         if (session && session.token.access_token) {
             console.log("Access Token:", session.token.access_token);
             try {
-                const recommendedData = await getRecommendations(session.token.access_token);
+                const recommendedData = await getRecommendations(genre);
                 console.log(recommended)
                 console.log("fetched profile")
                 setRecommended(recommendedData);
@@ -31,6 +32,8 @@ export default function Page({ params }) {
 }, [genre, session]);
 
   return (
-    <div>genre: {genre}</div>
+    <>
+      <div>genre: {genre}</div>
+    </>
   )
 }
