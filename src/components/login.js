@@ -59,17 +59,11 @@ export default function Login() {
                 <>
                 <p>Profile name: {profile.display_name}</p>
                 <p>Followers: {profile.followers.total}</p>
-                <Image
-                    src={profile.images[1].url} 
-                    alt="Profile Picture"
-                    width={100}  // Specify the width you want
-                    height={100} // Specify the height you want
-                />
                     <div className="flex flex-wrap gap-2.5">
                         {genres.map((genre, index) => (
                             <Link
                                 key={index} 
-                                href={`/genre/${encodeURIComponent(genre)}`}
+                                href={`/genre/${genre}`}
                                 className="px-2.5 py-1.5 bg-gray-200 rounded text-black no-underline"
                             >
                             {genre}

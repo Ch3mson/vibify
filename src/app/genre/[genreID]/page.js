@@ -5,35 +5,41 @@ import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react'
 
 export default function Page({ params }) {
-
   const { data: session, status } = useSession();
   const [recommended, setRecommended] = useState(null);
+  const [hasFetched, setHasFetched] = useState(false); // prevent alt tab refreshing
 
   const genre = params.genreID
-  
 
   useEffect(() => {
-    async function fetchRecommended(genre) {
-        console.log("Session:", session); 
-        if (session && session.token.access_token) {
-            console.log("Access Token:", session.token.access_token);
-            try {
-                const recommendedData = await getRecommendations(genre);
-                console.log(recommended)
-                console.log("fetched profile")
-                setRecommended(recommendedData);
-            } catch (error) {
-                console.error("Error fetching profile:", error);
-            }
+    async function fetchRecommended() {
+      if (session && session.token.access_token && !hasFetched) {
+        try {
+          const recommendedSongs = await getRecommendations(genre);
+          setRecommended(recommendedSongs);
+          setHasFetched(true);
+        } catch (error) {
+          console.error("Error fetching recommended songs:", error);
         }
+      }
     }
 
-    fetchRecommended(genre);
-}, [genre, session]);
+    fetchRecommended();
+  }, [genre, session, hasFetched]);
 
   return (
     <>
-      <div>genre: {genre}</div>
+      <div>Genre: {genre}</div>
+      {recommended && (
+        <div>
+          <h2>Recommended Songs:</h2>
+          <ul>
+            {recommended.tracks?.map((track) => (
+              <li key={track.id}>{track.name} by {track.artists[0].name}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </>
-  )
+  );
 }
