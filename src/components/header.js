@@ -33,12 +33,19 @@ export default function Header() {
     return (
         <div className="flex justify-between items-center py-4 px-8">
             <p className="text-slate-500">Signed in as {session.user.email}</p>
+            <button 
+                onClick={() => signOut()} 
+                className="text-slate-500 hover:text-slate-200"
+            >
+                Sign out
+            </button>
         </div>
     )
   }
 
   return (
         <div className="flex justify-between items-center py-4 px-8">
+            <p></p>
             <button className="text-slate-500 hover:text-slate-200" onClick={() => signIn()}>Sign in</button>
         </div>
   )

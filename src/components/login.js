@@ -71,12 +71,6 @@ export default function Login() {
                                         </div>
                                 </>
                             )}
-                            <button 
-                                onClick={() => signOut()} 
-                                className="mt-4 px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 transition-colors"
-                            >
-                                Sign out
-                            </button>
                         </div>
                     </div>
                 </div>

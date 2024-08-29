@@ -3,9 +3,9 @@ import React from 'react'
 export default function Hero() {
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <section className="col-span-full mb-4 mx-auto w-full max-w-7xl px-5 md:px-12 lg:px-16">
-        <div className="mx-auto flex w-full text-left">
-          <div className="mx-auto inline-flex items-center align-middle">
+      <section className="col-span-full mx-auto w-full max-w-7xl px-5 md:px-12 lg:px-16 mt-[-90px]">
+        <div className="mx-auto flex w-full text-left ">
+          <div className="mx-auto inline-flex">
             <div className="text-center">
               <h1
                 className="max-w-8xl text-4xl font-extrabold leading-none tracking-tighter 
