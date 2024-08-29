@@ -31,17 +31,15 @@ export default function Header() {
 
   if (session && profile) {
     return (
-        <div className="flex justify-between items-center py-4 px-3 border-b">
+        <div className="flex justify-between items-center py-4 px-8">
             <p className="text-slate-500">Signed in as {session.user.email}</p>
-            <p className="text-slate-500">Profile: {profile.display_name}</p>
         </div>
     )
   }
 
   return (
-    <div className="flex justify-between items-center py-4 px-3 border-b">
-    <p className="text-slate-500">Not Logged In</p>
-    <p className="text-slate-500"></p>
-</div>
+        <div className="flex justify-between items-center py-4 px-8">
+            <button className="text-slate-500 hover:text-slate-200" onClick={() => signIn()}>Sign in</button>
+        </div>
   )
 }
