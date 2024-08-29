@@ -4,8 +4,7 @@ export async function getProfile() {
     try {
         const session = await getSession()
         if (!session || !session.token.access_token) {
-            console.error("No access token found in session");
-            return null;
+            throw new Error("No access token found in session");
         }
 
         const response = await fetch('https://api.spotify.com/v1/me', {
@@ -15,10 +14,23 @@ export async function getProfile() {
         });
 
         if (!response.ok) {
-            console.error("API request failed:", response.status, response.statusText);
             const errorBody = await response.text();
+            console.error("API request failed:", response.status, response.statusText);
             console.error("Error body:", errorBody);
-            return null;
+            
+            let errorMessage;
+            try {
+                const errorJson = JSON.parse(errorBody);
+                errorMessage = errorJson.error?.message || 'Unknown error occurred';
+            } catch (e) {
+                errorMessage = errorBody || 'Unknown error occurred';
+            }
+
+            if (errorMessage.includes("The access token expired")) {
+                throw new Error("The access token expired");
+            } else {
+                throw new Error(`API request failed: ${errorMessage}`);
+            }
         }
 
         const data = await response.json();
@@ -27,7 +39,7 @@ export async function getProfile() {
 
     } catch (error) {
         console.error("An error occurred while fetching the profile:", error);
-        return null;
+        throw error; // Re-throw the error so it can be caught in the component
     }
 }
 
