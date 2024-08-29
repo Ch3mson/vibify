@@ -5,7 +5,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { getProfile, getGenres } from "@/actions/actions";
 import Link from 'next/link';
 
-export default function Login() {
+export default function Genres() {
     const { data: session, status } = useSession();
     const [profile, setProfile] = useState(null);
     const [genres, setGenres] = useState([]);
@@ -46,9 +46,6 @@ export default function Login() {
         );
     }
 
-    const gradientTextClass = "animate-move-bg bg-gradient-to-r from-indigo-500 via-pink-500 to-indigo-500 bg-[length:400%] bg-clip-text text-transparent";
-    const gradientButtonClass = "px-4 py-2 bg-gradient-to-r from-indigo-500 via-pink-500 to-indigo-500 text-white font-bold rounded-lg hover:opacity-80 transition-opacity";
-
     if (session) {
         return (
             <section className="col-span-full mb-4 mx-auto w-full max-w-7xl items-center px-5 pb-6 md:px-12 lg:px-16">
@@ -57,18 +54,18 @@ export default function Login() {
                         <div className="text-center">
                             {profile && (
                                 <>
-                                        <div className="flex flex-wrap justify-center gap-2.5 py-16">
-                                            {genres.map((genre, index) => (
-                                                <Link
-                                                    key={index} 
-                                                    href={`/genre/${genre}`}
-                                                    className="text-white px-4 py-2 border-2 border-white rounded-lg
-                                                            transform hover:scale-105 transition-all duration-200 ease-in-out"
-                                                >
-                                                    {genre.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-                                                </Link>
-                                            ))}
-                                        </div>
+                                    <div className="flex-wrap flex-col justify-center grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 items-center">
+                                        {genres.map((genre, index) => (
+                                            <Link
+                                                key={index} 
+                                                href={`/genre/${genre}`}
+                                                className="text-slate-200 px-4 py-3 border-2 border-slate-400 rounded-lg
+                                                        transform hover:scale-105 transition-all duration-200 ease-in-out"
+                                            >
+                                                {genre.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                                            </Link>
+                                        ))}
+                                    </div>
                                 </>
                             )}
                         </div>
