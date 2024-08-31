@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, forwardRef } from 'react';
 import { useSession, signIn, signOut } from "next-auth/react";
 import { getProfile, getGenres } from "@/actions/actions";
 import Link from 'next/link';
 
-export default function Genres() {
+const Genres = forwardRef((props, ref) => {
     const { data: session, status } = useSession();
     const [profile, setProfile] = useState(null);
     const [genres, setGenres] = useState([]);
@@ -37,18 +37,9 @@ export default function Genres() {
         return <div>Loading...</div>;
     }
 
-    if (sessionExpired) {
-        return (
-            <>
-                <p>Your session has expired. Please sign in again.</p>
-                <button onClick={() => signIn()}>Sign in</button>
-            </>
-        );
-    }
-
     if (session) {
         return (
-            <section className="col-span-full mb-4 mx-auto w-full max-w-7xl items-center px-5 pb-6 md:px-12 lg:px-16">
+            <section ref={ref} className="col-span-full mb-4 mx-auto w-full max-w-7xl items-center px-5 pb-6 md:px-12 lg:px-16">
                 <div className="mx-auto flex w-full">
                     <div className="mx-auto w-full">
                         <div className="text-center">
@@ -74,4 +65,8 @@ export default function Genres() {
             </section>
         );
     }
-}
+});
+
+Genres.displayName = 'Genres';
+
+export default Genres;

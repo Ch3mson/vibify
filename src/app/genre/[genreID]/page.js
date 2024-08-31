@@ -1,6 +1,8 @@
 'use client'
 
 import { getRecommendations } from '@/actions/actions'
+import GenreHeader from '@/components/genreHeader';
+import Header from '@/components/header';
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react'
 
@@ -8,8 +10,7 @@ export default function Page({ params }) {
   const { data: session, status } = useSession();
   const [recommended, setRecommended] = useState(null);
   const [hasFetched, setHasFetched] = useState(false); // prevent alt tab refreshing
-
-  const genre = params.genreID
+  const genreID = params.genreID;
 
   useEffect(() => {
     async function fetchRecommended() {
@@ -25,11 +26,11 @@ export default function Page({ params }) {
     }
 
     fetchRecommended();
-  }, [genre, session, hasFetched]);
+  }, [session, hasFetched]);
 
   return (
     <>
-      <div>Genre: {genre}</div>
+      <div>Genre: {genreID}</div>
       {recommended && (
         <div>
           <h2>Recommended Songs:</h2>

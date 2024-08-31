@@ -1,13 +1,18 @@
+'use client'
+
 import Header from "@/components/header";
 import Hero from "@/components/hero";
-import Login from "@/components/genres";
+import Genres from "@/components/genres";
+import { useRef } from "react";
 
 export default function Home() {
+
+  const genresRef = useRef(null);
+
   return (
     <main>
-      <Header />
-      <Hero />
-      <Login />
+      <Hero genresRef={genresRef} />
+      <Genres ref={genresRef} />
     </main>
   )
 }

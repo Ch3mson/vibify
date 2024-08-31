@@ -2,6 +2,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./AuthProvider";
 import Container from "@/components/container";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,8 +18,10 @@ export default function RootLayout({ children }) {
       <body className={`${inter.className} bg-[#040613]`}>
           <AuthProvider>
             <Container>
+              <Header />
               {children}
             </Container>
+            <Footer />
           </AuthProvider>
         </body>
     </html>
