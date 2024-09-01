@@ -16,7 +16,7 @@ export default function Page({ params }) {
     async function fetchRecommended() {
       if (session && session.token.access_token && !hasFetched) {
         try {
-          const recommendedSongs = await getRecommendations(genre);
+          const recommendedSongs = await getRecommendations(genreID);
           setRecommended(recommendedSongs);
           setHasFetched(true);
         } catch (error) {
@@ -26,7 +26,7 @@ export default function Page({ params }) {
     }
 
     fetchRecommended();
-  }, [session, hasFetched]);
+  }, [session, hasFetched, genreID]);
 
   return (
     <>

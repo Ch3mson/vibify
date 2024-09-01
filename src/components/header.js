@@ -29,7 +29,7 @@ export default function Header() {
         fetchData();
     }, [session]);
 
-  if (session && profile) {
+  if (status === 'authenticated') {
     return (
         <div className="flex justify-between items-center py-4 px-8">
             <p className="text-slate-500">Signed in as {session.user.email}</p>
@@ -54,7 +54,7 @@ export default function Header() {
 
   return (
         <div className="flex justify-between items-center py-4 px-8">
-            <p></p>
+            <p className='text-slate-500'>No session found</p>
             <button className="text-slate-500 hover:text-slate-200" onClick={() => signIn()}>Sign in</button>
         </div>
   )
