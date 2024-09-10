@@ -84,7 +84,7 @@ export async function getRecommendations(genreID) {
         // find a seed artist and seed track
         console.log("fetched from https://api.spotify.com/v1/recommendations?limit=50&market=CA&seed_genres=${genreID}&seed_tracks=0c6xIDDpzE81m2q797ordA")
         console.log("The genre ID is: " + genreID)
-        const response = await fetch (`https://api.spotify.com/v1/recommendations?limit=10&market=CA&seed_genres=${genreID}`, {
+        const response = await fetch (`https://api.spotify.com/v1/recommendations?limit=28&market=CA&seed_genres=${genreID}`, {
             headers: {
                 Authorization: `Bearer ${session.token.access_token}`
             }

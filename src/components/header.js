@@ -3,6 +3,7 @@ import { getProfile } from '@/actions/actions';
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
+import { ModeToggle } from './ui/modeToggle';
 
 export default function Header() {
 
@@ -29,33 +30,31 @@ export default function Header() {
         fetchData();
     }, [session]);
 
-  if (status === 'authenticated') {
     return (
         <div className="flex justify-between items-center py-4 px-8">
-            <p className="text-slate-500">Signed in as {session.user.email}</p>
+            <p className="text-slate-400">
+                {status === 'authenticated' 
+                    ? `Signed in as ${session.user.email}`
+                    : 'No session found'}
+            </p>
             
-            <div className='flex gap-4 text-slate-500'>
-                <Link 
-                    href="/"
-                    className='hover:text-slate-200 text-base'
-                >
-                    Home
-                </Link>
+            <div className='flex gap-4 items-center text-slate-300'>
+                {status === 'authenticated' && (
+                    <Link 
+                        href="/"
+                        className='hover:text-slate-200 text-base'
+                    >
+                        Home
+                    </Link>
+                )}
                 <button 
-                    onClick={() => signOut()} 
+                    onClick={() => status === 'authenticated' ? signOut() : signIn()} 
                     className='hover:text-slate-200 text-base'
                 >
-                    Sign out
+                    {status === 'authenticated' ? 'Sign out' : 'Sign in'}
                 </button>
+                <ModeToggle />
             </div>
         </div>
     )
-  }
-
-  return (
-        <div className="flex justify-between items-center py-4 px-8">
-            <p className='text-slate-500'>No session found</p>
-            <button className="text-slate-500 hover:text-slate-200" onClick={() => signIn()}>Sign in</button>
-        </div>
-  )
 }
