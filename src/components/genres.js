@@ -50,7 +50,7 @@ const Genres = forwardRef((props, ref) => {
                                             <Link
                                                 key={index} 
                                                 href={`/genre/${genre}`}
-                                                className="text-slate-200 px-4 py-3 border-2 border-slate-400 rounded-lg
+                                                className="px-4 py-3 border-2 border-slate-500 rounded-lg
                                                         transform hover:scale-105 transition-all duration-200 ease-in-out"
                                             >
                                                 {genre.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}

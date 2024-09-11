@@ -1,11 +1,10 @@
 'use client'
 
 import { getRecommendations } from '@/actions/actions'
-import GenreHeader from '@/components/genreHeader';
-import Header from '@/components/header';
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react'
-import RecommendedSongs from '@/components/recommendedSongs'; // Assuming this is the correct path
+import RecommendedSongs from '@/components/recommendedSongs';
+import { Button } from '@/components/ui/button';
 
 export default function Page({ params }) {
   const { data: session, status } = useSession();
@@ -30,13 +29,13 @@ export default function Page({ params }) {
   }, [session, hasFetched, genreID]);
 
   return (
-    <> 
-      <div>Genre: {genreID}</div>
+    <>
+      <p className='text-center text-3xl font-bold sm:text-4xl p-8'>{genreID.charAt(0).toUpperCase() + genreID.slice(1)}</p>
+      <div className='flex justify-center pb-8'>
+        <Button>Import</Button>
+      </div>
       {recommended && recommended.tracks && (
-        <div>
-          <h2>Recommended Songs:</h2>
           <RecommendedSongs arrayOfSongs={recommended.tracks} />
-        </div>
       )}
     </>
   );

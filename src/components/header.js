@@ -32,24 +32,24 @@ export default function Header() {
 
     return (
         <div className="flex justify-between items-center py-4 px-8">
-            <p className="text-slate-400">
+            <p>
                 {status === 'authenticated' 
                     ? `Signed in as ${session.user.email}`
                     : 'No session found'}
             </p>
             
-            <div className='flex gap-4 items-center text-slate-300'>
+            <div className='flex gap-4 items-center'>
                 {status === 'authenticated' && (
                     <Link 
                         href="/"
-                        className='hover:text-slate-200 text-base'
+                        className='hover:text-slate-500 dark:hover:text-slate-200 text-base'
                     >
                         Home
                     </Link>
                 )}
                 <button 
                     onClick={() => status === 'authenticated' ? signOut() : signIn()} 
-                    className='hover:text-slate-200 text-base'
+                    className='hover:text-slate-500 dark:hover:text-slate-200 text-base'
                 >
                     {status === 'authenticated' ? 'Sign out' : 'Sign in'}
                 </button>

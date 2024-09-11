@@ -15,12 +15,14 @@ export default function RecommendedSongs({ arrayOfSongs }) {
                 <div key={track.id} className="flex flex-col h-full">
                     <Link
                         href={track.external_urls.spotify}
-                        className='shadow-feature-card dark:shadow-feature-card-dark group relative rounded-xl p-2 block flex-grow flex flex-col'
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className='shadow-feature-card dark:shadow-feature-card-dark group relative rounded-xl p-2 flex-grow flex flex-col'
                     >
                         <div className='flex items-center justify-between p-4'>
                             <div className='flex items-center gap-3 flex-grow min-w-0'>
                                 <Music className='w-4 h-4 flex-shrink-0' />
-                                <h2 className='font-light dark:text-neutral-100 truncate'>{track.name}</h2>
+                                <h2 className='font-light truncate'>{track.name}</h2>
                             </div>
                             <ArrowUpRightIcon className='w-4 h-4 opacity-0 transition-opacity group-hover:opacity-100 flex-shrink-0' />
                         </div>
